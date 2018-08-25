@@ -52,6 +52,27 @@ import { Component } from '@angular/core';
       {{ nameUser }}
       </div>
 
+      <!-- Testing show and hide behaviour using ngIf -->
+      
+      <div>
+        <input
+        type = "text"
+        [value]="nameUser"
+        (input)="handleInputCheck($event.target.value)">
+
+      </div>
+
+      <div *ngIf="nameUser.length > 2">
+      Searching for .... {{ nameUser }}
+      </div>
+
+      <template [ngIf]="nameUser.length > 2">
+      <div>
+      Searching for .... {{ nameUser }}
+      </div>
+      </template>
+
+
     </div>
   `
 })
@@ -78,6 +99,10 @@ export class AppComponent {
     this.nameNew = value;
   }
   getValueOnClick(value: string){
+    this.nameUser = value;
+  }
+
+  handleInputCheck(value: string){
     this.nameUser = value;
   }
   constructor() {
