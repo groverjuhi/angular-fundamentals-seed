@@ -4,6 +4,7 @@ interface Passenger{
 id: number;
 fullname: string;
 checkedIn: boolean;
+checkedInDate?: number|null;
 }
 
 @Component({
@@ -52,6 +53,26 @@ checkedIn: boolean;
           <!-- passenger list -->
         </li>
       </ul>
+      <h3>Airline Passengers with pipe</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+          <span class="status"
+          [class.checked-in]= "passenger.checkedIn"></span>
+          {{ i }}: {{ passenger.fullname}}
+          <!-- passenger list -->
+          <div>
+          {{ passenger | json }}
+          </div>
+          <div>
+          Checked in date :: 
+          {{ passenger.checkedInDate | date: 'yMMMd' | uppercase }}
+          <div>
+          Checked in status ::
+          {{ passenger.checkedInDate ? (passenger.checkedInDate | date: 'yMMMd') : 'Not Checked in' }}
+          </div>
+          </div>
+        </li>
+      </ul>
     </div>
   `
 })
@@ -60,11 +81,13 @@ export class AppComponent {
 passengers: Passenger[] = [{
   id: 1,
   fullname: 'Arnav',
-  checkedIn: true
+  checkedIn: true,
+  checkedInDate: 1535375562
   }, {
   id: 2,
   fullname: 'Juhi',
-  checkedIn: true
+  checkedIn: true,
+  checkedInDate: 1535375562
   }, {
   id: 3,
   fullname: 'Abhinav Grover',
@@ -72,7 +95,8 @@ passengers: Passenger[] = [{
   }, {
   id: 4,
   fullname: 'Jyoti',
-  checkedIn: true
+  checkedIn: true,
+  checkedInDate: 1535375562
   } 
 ]
 }
