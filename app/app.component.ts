@@ -11,23 +11,47 @@ checkedIn: boolean;
   styleUrls: ['app.component.scss'],
   template: `
     <div class="app">
-    <h3>Airline Passengers</h3>
-    <ul>
-      <template ngFor let-passenger let-i="index" [ngForOf]="passengers">
-        <li>
-         {{ i }}: {{ passenger.fullname}}
-         <!-- passenger list -->
+      <h3>Airline Passengers with sccs class</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+          <span class="status"
+          [class.checked-in]= "passenger.checkedIn"></span>
+          {{ i }}: {{ passenger.fullname}}
+          <!-- passenger list -->
         </li>
-      </template>
-    </ul>
+      </ul>
 
-    <h3>Airline Passengers</h3>
-    <ul>
-      <li *ngFor="let passenger of passengers; let i = index;">
-      {{ i }}: {{ passenger.fullname}}
-        <!-- passenger list -->
-      </li>
-    </ul>
+      <h3>Airline Passengers with ngClass</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+          <span class="status"
+          [ngClass]= "{ 'checked-in': passenger.checkedIn,   
+                        'checked-out': !passenger.checkedIn
+                      }" ></span>
+          {{ i }}: {{ passenger.fullname}}
+          <!-- passenger list -->
+        </li>
+      </ul>
+      <h3>Airline Passengers with styling</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+          <span class="status"
+          [style.backgroundColor]="(passenger.checkedIn ? '#2ecc71' : '#c0392b')">
+          </span>
+          {{ i }}: {{ passenger.fullname}}
+          <!-- passenger list -->
+        </li>
+      </ul>
+      <h3>Airline Passengers with ngStyle</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+          <span class="status"
+          [ngStyle]="{ backgroundColor: (passenger.checkedIn ? '#2ecc71' : '#c0392b') }">
+          </span>
+          {{ i }}: {{ passenger.fullname}}
+          <!-- passenger list -->
+        </li>
+      </ul>
     </div>
   `
 })
